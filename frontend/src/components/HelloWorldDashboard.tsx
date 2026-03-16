@@ -13,9 +13,7 @@ export default function HelloWorldDashboard() {
 
   const fetchMessages = async () => {
     try {
-      const data = await apiClient.get<MessageResponse[]>(
-        "/api/messages/latest?limit=10",
-      );
+      const data = await apiClient.get<MessageResponse[]>("/api/messages/latest?limit=10");
       setMessages(data);
     } catch (err) {
       setNotification({
@@ -36,7 +34,10 @@ export default function HelloWorldDashboard() {
     setNotification(null);
     try {
       await apiClient.post("/api/messages");
-      setNotification({ type: "success", text: "Message created successfully!" });
+      setNotification({
+        type: "success",
+        text: "Message created successfully!",
+      });
       void fetchMessages();
     } catch (err) {
       setNotification({
@@ -49,11 +50,7 @@ export default function HelloWorldDashboard() {
   };
 
   if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <div className="flex min-h-screen items-center justify-center">Loading...</div>;
   }
 
   return (
@@ -61,17 +58,13 @@ export default function HelloWorldDashboard() {
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Webapp Scaffold
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900">Webapp Scaffold</h1>
           <p className="text-gray-600">Let's start hacking!</p>
         </div>
 
         {/* Create Message Card */}
         <div className="mb-6 rounded-lg bg-white p-6 shadow-lg">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900">
-            Create Message
-          </h2>
+          <h2 className="mb-4 text-xl font-semibold text-gray-900">Create Message</h2>
           <button
             onClick={() => void handleCreateMessage()}
             disabled={isCreating}
@@ -96,9 +89,7 @@ export default function HelloWorldDashboard() {
 
         {/* Messages List */}
         <div className="rounded-lg bg-white p-6 shadow-lg">
-          <h3 className="mb-4 text-lg font-semibold text-gray-900">
-            Recent Messages
-          </h3>
+          <h3 className="mb-4 text-lg font-semibold text-gray-900">Recent Messages</h3>
           {messages.length === 0 ? (
             <p className="py-8 text-center text-gray-500">No messages yet</p>
           ) : (

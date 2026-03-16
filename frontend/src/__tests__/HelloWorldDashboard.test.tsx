@@ -11,8 +11,8 @@ const mockMessage = {
 
 vi.mock("~/lib/api-client", () => ({
   apiClient: {
-    get: vi.fn().mockResolvedValue([mockMessage]),
-    post: vi.fn().mockResolvedValue(mockMessage),
+    get: vi.fn(),
+    post: vi.fn(),
   },
 }));
 
@@ -44,9 +44,7 @@ describe("HelloWorldDashboard", () => {
   it("renders the create message button", async () => {
     render(<HelloWorldDashboard />);
     await waitFor(() => {
-      expect(
-        screen.getByText("Create Hello World Message"),
-      ).toBeInTheDocument();
+      expect(screen.getByText("Create Hello World Message")).toBeInTheDocument();
     });
   });
 
@@ -54,16 +52,12 @@ describe("HelloWorldDashboard", () => {
     const user = userEvent.setup();
     render(<HelloWorldDashboard />);
 
-    await waitFor(() =>
-      expect(screen.getByText("Create Hello World Message")).toBeInTheDocument(),
-    );
+    await waitFor(() => expect(screen.getByText("Create Hello World Message")).toBeInTheDocument());
 
     await user.click(screen.getByText("Create Hello World Message"));
 
     await waitFor(() => {
-      expect(
-        screen.getByText("Message created successfully!"),
-      ).toBeInTheDocument();
+      expect(screen.getByText("Message created successfully!")).toBeInTheDocument();
     });
   });
 
@@ -73,9 +67,7 @@ describe("HelloWorldDashboard", () => {
 
     render(<HelloWorldDashboard />);
 
-    await waitFor(() =>
-      expect(screen.getByText("Create Hello World Message")).toBeInTheDocument(),
-    );
+    await waitFor(() => expect(screen.getByText("Create Hello World Message")).toBeInTheDocument());
 
     await user.click(screen.getByText("Create Hello World Message"));
 
