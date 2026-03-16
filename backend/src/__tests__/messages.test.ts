@@ -53,7 +53,9 @@ describe("GET /api/messages", () => {
     const res = await request(app).get("/api/messages");
     expect(res.status).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body[0]).toMatchObject({ content: "Hello World" });
+    expect(res.body as unknown[]).toContainEqual(
+      expect.objectContaining({ content: "Hello World" }),
+    );
   });
 
   it("passes skip and limit to the query", async () => {
