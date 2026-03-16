@@ -4,7 +4,7 @@ import reactRefresh from "eslint-plugin-react-refresh";
 
 export default tseslint.config(
   {
-    ignores: ["dist"],
+    ignores: ["dist", "vite.config.ts", "vitest.config.ts"],
   },
   {
     files: ["**/*.ts", "**/*.tsx"],
