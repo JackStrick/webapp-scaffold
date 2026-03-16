@@ -8,7 +8,7 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "verbatimModuleSyntax": true,
-    "noEmit": true
+    "composite": true
   },
   "include": ["vite.config.ts", "vitest.config.ts"]
 }

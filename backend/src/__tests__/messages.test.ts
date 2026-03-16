@@ -20,7 +20,7 @@ jest.mock("../db/prisma", () => ({
   },
 }));
 
-const mockPrismaMessage = prisma.message as {
+const mockPrismaMessage = prisma.message as unknown as {
   create: jest.Mock;
   findMany: jest.Mock;
   findUnique: jest.Mock;
@@ -80,9 +80,7 @@ describe("GET /api/messages/latest", () => {
 
   it("respects the limit query param", async () => {
     await request(app).get("/api/messages/latest?limit=5");
-    expect(mockPrismaMessage.findMany).toHaveBeenCalledWith(
-      expect.objectContaining({ take: 5 }),
-    );
+    expect(mockPrismaMessage.findMany).toHaveBeenCalledWith(expect.objectContaining({ take: 5 }));
   });
 
   it("returns 400 for invalid limit", async () => {

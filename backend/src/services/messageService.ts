@@ -1,11 +1,7 @@
 import { prisma } from "../db/prisma";
 import type { MessageResponse } from "../types/message";
 
-function toResponse(message: {
-  id: string;
-  content: string;
-  createdAt: Date;
-}): MessageResponse {
+function toResponse(message: { id: string; content: string; createdAt: Date }): MessageResponse {
   return {
     id: message.id,
     content: message.content,
