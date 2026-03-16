@@ -1,5 +1,5 @@
-import HelloWorldDashboard from "~/components/HelloWorldDashboard";
+import PaymentDashboard from "~/components/PaymentDashboard";
 
 export default function HomePage() {
-  return <HelloWorldDashboard />;
+  return <PaymentDashboard />;
 }

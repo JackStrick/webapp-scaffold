@@ -3,7 +3,8 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import { errorHandler } from "./middleware/errorHandler";
-import { messageRouter } from "./routes/messages";
+import { transactionRouter } from "./routes/transactions";
+import { userRouter } from "./routes/users";
 
 const app = express();
 
@@ -20,7 +21,8 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
 
-app.use("/api/messages", messageRouter);
+app.use("/api", userRouter);
+app.use("/api/transactions", transactionRouter);
 
 app.use(errorHandler);
 

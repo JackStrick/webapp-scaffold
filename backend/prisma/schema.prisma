@@ -15,14 +15,34 @@ model Message {
   @@map("messages")
 }
 
-// Auth path: uncomment and run `npm run migrate` to add user authentication
-//
-// model User {
-//   id        String   @id @default(uuid())
-//   email     String   @unique
-//   password  String
-//   createdAt DateTime @default(now()) @map("created_at")
-//   updatedAt DateTime @updatedAt @map("updated_at")
-//
-//   @@map("users")
-// }
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  handle       String   @unique
+  avatarUrl    String?  @map("avatar_url")
+  isActive     Boolean  @default(true) @map("is_active")
+  balanceCents Int      @default(0) @map("balance_cents")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  sentTransactions     Transaction[] @relation("sender")
+  receivedTransactions Transaction[] @relation("recipient")
+
+  @@map("users")
+}
+
+model Transaction {
+  id          String   @id @default(uuid())
+  senderId    String   @map("sender_id")
+  recipientId String   @map("recipient_id")
+  amountCents Int      @map("amount_cents")
+  memo        String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  sender    User @relation("sender", fields: [senderId], references: [id])
+  recipient User @relation("recipient", fields: [recipientId], references: [id])
+
+  @@index([senderId, createdAt])
+  @@index([recipientId, createdAt])
+  @@map("transactions")
+}
